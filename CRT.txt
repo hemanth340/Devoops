@@ -1,0 +1,264 @@
+#DETECT SUBSTRING
+
+import string
+S=input()
+X=input()
+if('*' not in X):
+    print(S.find(X))
+else:
+    for i in string.ascii_lowercase:
+        S1=X.replace('*',i)
+        a=S.find(S1)
+        if(a==-1):
+            continue
+        else:
+            print(a)
+            break
+    else:
+        print(-1)
+
+#KARTHIK STRING
+
+s=input()
+k=int(input())
+x=''
+for i in range(len(s)):
+    a=s[:k]
+    a=sorted(a)
+    if(len(a)>0):
+        x+=a[0]
+        f=s.find(a[0])
+        s=s[:f]+s[f+1:]
+    else:
+        break
+print(x)
+
+#ALPHABET MISSING(arranging the words in order accordin to the dictionary order E specified)
+
+for _ in range(int(input())):
+    e=input()
+    m=int(input())
+    l=[]
+    for i in range(m):
+        l.append(input())
+    l=sorted(l,key=lambda x:[e.index(c) for c in x])
+    for i in l:
+        print(i)
+
+
+#PALINDROME
+
+s=input().lower()
+l1=[]
+l2=[]
+for i in s:
+    if(i.isalpha()):
+        l1.append(i)
+        l2.append(i)
+l2.reverse()
+if(l1==l2):
+    print('YES')
+else:
+    print('NO')
+
+
+#CHARACTER UNIQUE
+
+s=input()
+l1=list(s)
+flag=0
+if(s.isalpha()!=True):
+    print('InValid Sentence')
+    exit()
+for i in l1:
+    if(l1.count(i)==1):
+        flag=1
+        print(i)
+if(flag==0):
+    print('No Unique Characters')
+
+
+#SUBSET SORT
+
+s=input()
+s="".join(sorted(list(s)))
+for i in range(len(s)):
+    for j in range(i,len(s)):
+        print(s[i:j+1])
+
+
+#PRIOR ELEMENT
+
+n=int(input())
+l1=list(map(int,input().split()))
+l2=[l1[0]]
+cnt=1
+for i in range(1,len(l1)):
+    flag=0
+    for j in l2:
+        if(l1[i]<=j):
+            flag=1
+            continue
+    l2.append(l1[i])
+    if(flag==0):
+        cnt+=1
+print(cnt)
+
+#REVERSE SQUARES
+
+n=int(input())
+if(n>10**6):
+    print(-1)
+else:
+    b=c=n
+    cnt=0
+    l1=[]
+    while(b>0):
+        b=b//10
+        cnt+=1
+    while(c>0):
+        l1.append(c%10)
+        c=c//10
+    for i in l1:
+        print(i*i,end=' ')
+
+
+#PATTERN SUM
+
+n=int(input())
+for i in range(1,n+1):
+    k=2*i-1
+    for j in range(n-i+1,0,-1):
+        print(k,end=' ')
+        k+=2
+    print()
+
+
+#PREVIOUS STORE
+
+n=int(input())
+a=[]
+s=0
+for _ in range(n):
+    ele=int(input())
+    a.append(ele)
+for i in range(len(a)-1):
+    s=s+abs(a[i]-a[i+1])
+print(s)
+
+
+#GENERATE OTP 2
+
+l1=list(map(int,input().split(',')))
+otp=''
+set1=min(l1)
+m,n=0,9
+for i in l1:
+    for j in str(i):
+        if(int(j)>m):
+            m=int(j)
+        if(int(j)<n):
+            n=int(j)
+if(m==n):
+    set2=0
+else:
+    set2=m+n
+otp+=str(set1)+str(set2)
+print(otp)
+
+
+#MOBILE NUMBER PROCESS
+
+n=int(input())
+s=str(n)
+f=int(s[0])
+op=''
+calc=f
+cnt=1
+flag=0
+for i in range(1,len(s)):
+    if(f%2==0):
+        calc=calc+int(s[i])
+        if(calc%2!=0):
+            op=op+str(calc)
+            if(cnt==9):
+                flag=1
+                print(op)
+                break
+            else:
+                f=int(s[i+1])
+                calc=0
+    else:
+        calc=calc+int(s[i])
+        if(calc%2==0):
+            op=op+str(calc)
+            if(cnt==9):
+                flag=1
+                print(op)
+                break
+            else:
+                f=int(s[i+1])
+                calc=0
+    cnt+=1
+if flag==0:
+    op=op+str(calc)
+    print(op)
+
+
+#TAUM AND B'DAY
+
+t=int(input())
+for _ in range(t):
+    b,w=map(int,input().split())
+    bc,wc,z=map(int,input().split())
+    if(z+wc<bc):
+        print(w*wc+b*z+b*wc)
+    elif(z+bc<wc):
+        print(w*z+w*bc+b*bc)
+    else:
+        print(b*bc+w*wc)
+
+
+#FOLLOW THE CHAIN
+
+n=int(input())
+a=n
+s=[n]
+s1=0
+while(n>0 or s1>9):
+    if n==0:
+        n=s1
+        s1=0
+    s1+=n%10
+    n//=10
+while(a!=1):
+    if(a%2==0):
+        a=a//2
+        s.append(a)
+    else:
+        a=3*a+1
+        s.append(a)
+try:
+    print(s[s1-1])
+except IndexError:
+    print(-1)
+
+
+#PARKING CARS
+
+R=int(input())
+C=int(input())
+l1=[]
+l2=[]
+for _ in range(R):
+    l2=[]
+    for _ in range(C):
+        l2.append(int(input()))
+    l1.append(l2)
+for i in range(R):
+    M=l1[0]
+    l=0
+    if(sum(M)<sum(l1[i])):
+        M=l1[i]
+        l=i
+print(l+1)
